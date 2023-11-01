@@ -18,7 +18,7 @@
                     </a>																
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('category.create')}}" class="nav-link">
+                    <a href="{{route('category.list')}}" class="nav-link">
                         <i class="nav-icon fas fa-file-alt"></i>
                         <p>Category</p>
                     </a>

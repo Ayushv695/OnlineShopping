@@ -34,8 +34,10 @@ Route::group(['prefix' => 'admin'],function(){
     Route::group(['middleware' => 'admin.auth'],function(){
         Route::get('/dashboard', [HomeController::class,'index'])->name('admin.dashboard');
         Route::get('/logout', [HomeController::class,'logout'])->name('admin.logout');
+
         // Category Routes
         Route::get('/category/create', [CategoryController::class,'create'])->name('category.create');
+        Route::get('/category/list', [CategoryController::class,'index'])->name('category.list');
         Route::post('/category/store', [CategoryController::class,'store'])->name('category.store');
 
         Route::get('/getSlug',function(Request $request){
