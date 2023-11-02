@@ -10,19 +10,9 @@ use Illuminate\Support\Facades\Validator;
 class CategoryController extends Controller
 {
     public function index(Request $request){
-        if($request->ajax()){
-            dd($request->search);
-            $categories = Category::where('name','like','%'.$request->search.'%')->get();
-            return response()->json([
-                'status' => true,
-                'value' => $categories,
-            ]);
-        }else{
-            // dd($request->search);
-            $categories = Category::latest()->paginate(5);
-            return view('admin.category.list',compact('categories'));
-        }
-       
+        $categories = Category::query();
+        $categories = $categories->latest()->paginate(5);
+        return view('admin.category.list',compact('categories'));
     }
     public function create(){
         return view('admin.category.create');
