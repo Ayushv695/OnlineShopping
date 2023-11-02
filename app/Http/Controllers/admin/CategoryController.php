@@ -11,6 +11,9 @@ class CategoryController extends Controller
 {
     public function index(Request $request){
         $categories = Category::query();
+        if(!empty($request->search)){
+            $categories = $categories->where('name','like','%'.$request->search.'%');
+        }
         $categories = $categories->latest()->paginate(5);
         return view('admin.category.list',compact('categories'));
     }

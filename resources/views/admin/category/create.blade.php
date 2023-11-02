@@ -62,6 +62,7 @@
 <script>
     $("#categoryForm").submit(function(event){
         event.preventDefault();
+        $('button[type=submit]').prop('disabled',true);
         var element = $(this);
         $.ajax({
             url: '{{route("category.store")}}',
@@ -69,8 +70,9 @@
             data: element.serializeArray(),
             dataType: 'json',
             success:function(response){
-                
+                $('button[type=submit]').prop('disabled',false);
                 if(response['status'] == true){
+                    window.location.href = "{{route('category.list')}}";
                     $('#name').removeClass('is-invalid')
                     .siblings('p')
                     .removeClass('invalid-feedback')
@@ -113,12 +115,14 @@
     
     $("#name").change(function(event){
         element = $(this);
+        $('button[type=submit]').prop('disabled',true);
         $.ajax({
             url : '{{route("getSlug")}}',
             type: 'get',
             data: {name:element.val()},
             dataType: 'json',
             success: function(response){
+                $('button[type=submit]').prop('disabled',false);
                 if(response['status'] == true){
                     $('#slug').val(response['slug']);
                 }
